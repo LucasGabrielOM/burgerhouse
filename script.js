@@ -68,15 +68,20 @@ function removeItem(index){
 }
 
 function toggleCart(){
-  const cartEl = document.getElementById("cart");
+  const cart = document.getElementById("cart");
   const overlay = document.getElementById("overlay");
 
-  cartEl.classList.toggle("active");
-  overlay.classList.toggle("active");
+  const isActive = cart.classList.contains("active");
 
-  document.body.style.overflow = cartEl.classList.contains("active")
-    ? "hidden"
-    : "auto";
+  if(isActive){
+    cart.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "auto";
+  } else {
+    cart.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function checkout(){
