@@ -101,7 +101,7 @@ function checkout(){
 
   message += `%0A💰 *Total:* R$ ${total}`;
 
-  const url = `https://wa.me/5599999999999?text=${message}`;
+  const url = `https://wa.me/5548999509515?text=${message}`;
 
   window.open(url, "_blank");
 }
