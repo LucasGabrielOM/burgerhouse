@@ -87,7 +87,7 @@ body {
   padding-top: 100px;
   background: 
     linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.3)),
-    url('./img/burger-floripa.jpg') center/cover no-repeat;
+    url('./burger-floripa.jpg') center/cover no-repeat;
 
   display: flex;
   align-items: center;
@@ -251,7 +251,7 @@ body {
 .about {
   position: relative;
   padding: 120px 0;
-  background: url('./img/burger-floripa.jpg') center/cover no-repeat;
+  background: url('./burger-floripa.jpg') center/cover no-repeat;
 }
 .about-text {
   opacity: 0;
