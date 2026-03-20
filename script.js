@@ -8,23 +8,27 @@ let cart = [];
 
 const container = document.getElementById("products");
 
-products.forEach(p=>{
-  container.innerHTML += `
-    <div class="card">
-      <img src="${p.img}">
-      <div class="card-content">
-        <h3>${p.name}</h3>
-        <p>R$ ${p.price}</p>
-        <button class="add-btn" onclick="addToCart(${p.id})">
-          Adicionar
-        </button>
+function renderProducts() {
+  container.innerHTML = "";
+
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.img}">
+        <div class="card-content">
+          <h3>${p.name}</h3>
+          <p>R$ ${p.price.toFixed(2)}</p>
+          <button class="add-btn" onclick="addToCart(${p.id})">
+            Adicionar
+          </button>
+        </div>
       </div>
-    </div>
-  `;
-});
+    `;
+  });
+}
 
 function addToCart(id){
-  const product = products.find(p=>p.id===id);
+  const product = products.find(p => p.id === id);
   cart.push(product);
   updateCart();
 }
@@ -37,7 +41,7 @@ function updateCart(){
   items.innerHTML = "";
   let total = 0;
 
-  cart.forEach((item,i)=>{
+  cart.forEach((item, i) => {
     total += item.price;
 
     items.innerHTML += `
@@ -57,31 +61,44 @@ function updateCart(){
   totalEl.innerText = total.toFixed(2);
   count.innerText = cart.length;
 }
+
 function removeItem(index){
   cart.splice(index, 1);
   updateCart();
 }
 
 function toggleCart(){
-  const cart = document.getElementById("cart");
+  const cartEl = document.getElementById("cart");
   const overlay = document.getElementById("overlay");
 
-  cart.classList.toggle("active");
+  cartEl.classList.toggle("active");
   overlay.classList.toggle("active");
 
-  document.body.style.overflow = cart.classList.contains("active")
+  document.body.style.overflow = cartEl.classList.contains("active")
     ? "hidden"
     : "auto";
 }
 
 function checkout(){
-  let msg = "Pedido:%0A";
 
-  cart.forEach(i=>{
-    msg += `- ${i.name}%0A`;
+  if(cart.length === 0){
+    alert("Seu carrinho está vazio!");
+    return;
+  }
+
+  let message = "🍔 *Pedido BurgerHouse* %0A%0A";
+
+  cart.forEach(item => {
+    message += `• ${item.name} - R$ ${item.price.toFixed(2)}%0A`;
   });
 
-  msg += `Total: R$ ${document.getElementById("total").innerText}`;
+  const total = document.getElementById("total").innerText;
 
-  window.open(`https://wa.me/5599999999999?text=${msg}`);
+  message += `%0A💰 *Total:* R$ ${total}`;
+
+  const url = `https://wa.me/5599999999999?text=${message}`;
+
+  window.open(url, "_blank");
 }
+
+renderProducts();
